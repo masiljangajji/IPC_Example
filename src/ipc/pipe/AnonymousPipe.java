@@ -16,7 +16,7 @@ public class AnonymousPipe {
             PipedInputStream childInputStream = new PipedInputStream(childOutputStream);
 
             // 자식 프로세스 시작
-            new ChildProcess(parentInputStream, parentOutputStream, childInputStream, childOutputStream).start();
+            new ChildProcess(parentInputStream, childOutputStream).start();
 
             // 부모 프로세스에서 파이프를 통해 데이터 전송
             String messageToChild = "파이프를 이용한 통신1";
@@ -38,8 +38,7 @@ class ChildProcess extends Thread {
     private PipedInputStream parentInputStream;
     private PipedOutputStream childOutputStream;
 
-    public ChildProcess(PipedInputStream parentInputStream, PipedOutputStream parentOutputStream,
-                        PipedInputStream childInputStream, PipedOutputStream childOutputStream) {
+    public ChildProcess(PipedInputStream parentInputStream, PipedOutputStream childOutputStream) {
         this.parentInputStream = parentInputStream;
         this.childOutputStream = childOutputStream;
     }
